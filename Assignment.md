@@ -288,7 +288,7 @@ GROUP BY LocationId;
 -- total number of courier delivered (status=delivered) at each location
 SELECT LocationId, count(courierId) AS [No_of_couriers] FROM payment
 where CourierID IN (select CourierID from Courier
-					where Status='Delivered')
+				where Status='Delivered')
 group by locationid;
 ```
 17. Find the courier with the highest average delivery time: 
@@ -315,26 +315,26 @@ GROUP BY locationid;
 (LocationID = X): 
 ```sql
 SELECT * FROM courier 
-WHERE courierid in (SELECT courierid FROM payment WHERE LocationId=3 
-					GROUP BY CourierID
-					HAVING sum(amount)>1000);
+WHERE courierid IN (SELECT courierid FROM payment WHERE LocationId=3 
+				GROUP BY CourierID
+				HAVING sum(amount)>1000);
 ```
 21. Retrieve couriers who have received payments totaling more than $1000 after a certain date 
 (PaymentDate > 'YYYY-MM-DD'): 
 ```sql
 SELECT * FROM courier 
 WHERE courierid IN (SELECT courierid FROM payment WHERE PaymentDate='2024-04-26' 
-					GROUP BY CourierID
-					HAVING sum(amount)>1000);
+				GROUP BY CourierID
+				HAVING sum(amount)>1000);
 ```
 22. Retrieve locations where the total amount received is more than $5000 before a certain date 
 (PaymentDate > 'YYYY-MM-DD') 
 ```sql
 SELECT * FROM location 
-WHERE locationid in (SELECT locationid FROM payment
-					WHERE PaymentDate < '2024-04-25'
-					GROUP BY LocationId
-					HAVING sum(amount)>5000);
+WHERE locationid IN (SELECT locationid FROM payment
+				WHERE PaymentDate < '2024-04-25'
+				GROUP BY LocationId
+				HAVING sum(amount)>5000);
 ```
 
 ## Task 4: Inner Join,Full Outer Join, Cross Join, Left Outer Join,Right Outer Join
@@ -447,29 +447,29 @@ GROUP BY LocationID;
 ```sql
 SELECT * FROM Courier
 WHERE SenderName IN ( SELECT SenderName FROM Courier
-					GROUP BY SenderName
-					HAVING COUNT(SenderName)>1);
+				GROUP BY SenderName
+				HAVING COUNT(SenderName)>1);
 ```
 44. List all employees who share the same role. 
 ```sql
 SELECT * FROM Employee 
 WHERE role IN (SELECT role FROM Employee 
-			GROUP BY Role
-			HAVING COUNT(Role) > 1);
+		GROUP BY Role
+		HAVING COUNT(Role) > 1);
 ```
 45. Retrieve all payments made for couriers sent from the same location. 
 ```sql
 SELECT * FROM payment
 WHERE LocationId IN (SELECT LocationId FROM payment
-					GROUP BY LocationID
-					HAVING COUNT(LocationID)>1);
+				GROUP BY LocationID
+				HAVING COUNT(LocationID)>1);
 ```
 46. Retrieve all couriers sent from the same location (based on SenderAddress). 
 ```sql
-SELECT *FROM Courier
+SELECT * FROM Courier
 WHERE cast(SenderAddress as varchar) IN (SELECT cast(SenderAddress as varchar)FROM Courier
-										GROUP BY cast(SenderAddress as varchar)
-										HAVING COUNT(*) > 1);
+								GROUP BY cast(SenderAddress as varchar)
+								HAVING COUNT(*) > 1);
 ```
 47. List employees and the number of couriers they have delivered: 
 ```sql
@@ -518,5 +518,5 @@ WHERE LocationID=(SELECT locationID FROM Payment
 ```sql
 SELECT * FROM Courier
 WHERE Weight>ALL(SELECT Weight FROM Courier
-			WHERE SenderName='Alexander Lee');
+		WHERE SenderName='Alexander Lee');
 ```
