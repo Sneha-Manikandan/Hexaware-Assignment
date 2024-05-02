@@ -140,7 +140,8 @@ where c.phoneNumber='555-555-5555';
 
 7. Calculate the average daily rate of all available cars.
 ```sql
-select AVG(dailyRate) as [average daily rate] from vehicle;
+select AVG(dailyRate) as [average daily rate] from vehicle
+where available=1;
 ```
 
 8. Find the car with the highest daily rate.
