@@ -71,7 +71,7 @@ VALUES
 
 
 CREATE TABLE Employee (
-EmployeeID INT PRIMARY KEY, 
+EmployeeID INT PRIMARY KEY IDENTITY(1,1), 
 Name VARCHAR(255), 
 Email VARCHAR(255) UNIQUE, 
 ContactNumber VARCHAR(20), 
@@ -81,17 +81,17 @@ Salary DECIMAL(10, 2)
 
 INSERT INTO Employee (EmployeeID, Name, Email, ContactNumber, Role, Salary)
 VALUES
-    (1, 'Clara Wilson', 'clara@example.com', '1234567890', 'Manager', 50000.00),
-    (2, 'Robert Brown', 'robert@example.com', '0987654321', 'Clerk', 30000.00),
-    (3, 'John Smith', 'alice@example.com', '5551234567', 'Driver', 40000.00),
-    (4, 'Jade William', 'jade@example.com', '9876543210', 'Supervisor', 45000.00),
-    (5, 'Emilia Harrison', 'emilia@example.com', '7778889999', 'Receptionist', 28000.00),
-    (6, 'Mike Jordan', 'mike@example.com', '1112223333', 'Courier', 35000.00),
-    (7, 'Santner Hood', 'santner@example.com', '4445556666', 'Analyst', 55000.00),
-    (8, 'Shane Watson', 'shane@example.com', '6667778888', 'Supervisor', 60000.00),
-    (9, 'Oliver Right', 'oliver@example.com', '2223334444', 'Courier', 52000.00),
-    (10, 'Peter Knight', 'peter@example.com', '8889990000', 'Sales', 48000.00),
-    (11, 'Xavier Peterson', 'xavier@example.com', '1122334445', 'Manager', 50000.00);
+    ( 'Clara Wilson', 'clara@example.com', '1234567890', 'Manager', 50000.00),
+    ('Robert Brown', 'robert@example.com', '0987654321', 'Clerk', 30000.00),
+    ('John Smith', 'alice@example.com', '5551234567', 'Driver', 40000.00),
+    ('Jade William', 'jade@example.com', '9876543210', 'Supervisor', 45000.00),
+    ( 'Emilia Harrison', 'emilia@example.com', '7778889999', 'Receptionist', 28000.00),
+    ('Mike Jordan', 'mike@example.com', '1112223333', 'Courier', 35000.00),
+    ( 'Santner Hood', 'santner@example.com', '4445556666', 'Analyst', 55000.00),
+    ('Shane Watson', 'shane@example.com', '6667778888', 'Supervisor', 60000.00),
+    ( 'Oliver Right', 'oliver@example.com', '2223334444', 'Courier', 52000.00),
+    ( 'Peter Knight', 'peter@example.com', '8889990000', 'Sales', 48000.00),
+    ( 'Xavier Peterson', 'xavier@example.com', '1122334445', 'Manager', 50000.00);
 
 
 CREATE TABLE Location(

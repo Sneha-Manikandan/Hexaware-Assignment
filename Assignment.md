@@ -520,3 +520,153 @@ SELECT * FROM Courier
 WHERE Weight>ALL(SELECT Weight FROM Courier
 		WHERE SenderName='Alexander Lee');
 ```
+
+# Coding
+# Task 5
+1. Write a program that checks whether a given order is delivered or not based on its status (e.g., 
+"Processing," "Delivered," "Cancelled"). Use if-else statements for this.
+```python
+orderId=int(input())
+status=courier["orderId"]["Status"]
+if(status=='Delivered'):
+    print("The order is delivered")
+elif(status=="Pending"):
+    print("The order is yet to be processed")
+elif(status=="In transit"):
+    print("The order is being shipped")
+else:
+    print("The status is unknown")
+```
+
+2. Implement a switch-case statement to categorize parcels based on their weight into "Light," 
+"Medium," or "Heavy." 
+```python
+if weight >= 0 and weight < 3:
+    return "Light"
+elif weight >= 3 and weight < 6:
+    return "Medium"
+elif weight >= 6:
+    return "Heavy"
+else:
+    return None
+```
+3. Implement User Authentication 1. Create a login system for employees and customers using Java 
+control flow statements. 
+```python
+```
+
+4. Implement Courier Assignment Logic 1. Develop a mechanism to assign couriers to shipments based 
+on predefined criteria (e.g., proximity, load capacity) using loops. 
+```python
+```
+
+5. Write a Java program that uses a for loop to display all the orders for a specific customer.
+```python
+def display_orders(courier,customerId):
+    for order in courier:
+        if(courier["userId"]==customerId):
+            print(order)
+
+customerId=int(input("Enter customer id: "))
+display_orders(courier,customerID)
+```
+
+6. Implement a while loop to track the real-time location of a courier until it reaches its destination.
+```python
+
+```
+7. Create an array to store the tracking history of a parcel, where each entry represents a location 
+update.
+```python
+``` 
+8. Implement a method to find the nearest available courier for a new order using an array of courier.
+```python
+```
+9. Parcel Tracking:
+```python
+```
+10. Customer Data Validation:
+```python
+import re
+def validate_customer_data(data, detail):
+    if detail == "name":
+        if re.match(r'^[a-zA-Z\s]+$',data) and data.istitle():
+            return "Valid data"
+    elif detail == "address":
+        if re.match(r'^[\w\s]+$',data):
+            return "Valid data"
+    elif detail == "phone":
+        if re.match(r'^\d{3}-\d{3}-\d{4}$', data):
+            return "Valid data"
+    return "Invalid data"
+
+print(validate_customer_data("Jennifer White", "name"))  
+print( validate_customer_data("123 Main St", "address"))  
+print(validate_customer_data("123-456-7890", "phone"))  
+print(validate_customer_data("123456-7890", "phone")) 
+
+
+```
+11. Address Formatting:
+```python
+def format_address(street, city, state, zip_code):
+    print(f"{street.title()}, {city.title()}, {state.upper()} {zip_code}")
+    
+street =input("Enter street name:")
+city = input("Enter city:")
+state = input("Enter state:")
+zipCode = input("Enter zipcode:") 
+print(format_address(street, city, state, zipCode))
+```
+
+12. Order confirmation Email:
+```python
+def confirmation_email(courier):
+    for each_courier in courier:
+    print(f"""
+    Dear {each_courier["name"]},\n\nYour order with order number {each_courier["courierId"]} has been confirmed.
+    Delivery Address: {each_courier["ReceiverAddress"]}
+    Expected Delivery Date: {each_courier["deliveryDate"]}
+    Thank you for choosing with us!""")
+  
+print(order_confirmation_email(courier))
+```
+
+13. Calculate Shipping Costs Function:
+```python
+def calculate_shipping_cost(courier,courierId):
+    for each_courier in courier:
+        shipping_cost = 50  
+        total_shipping_cost = shipping_cost * each_courier["weight"]
+        print(f"Courierid: {courierid} , Shipping cost {total_shipping_cost}")
+
+courierId=int(input("Enter the courierId"))
+print(calculate_shipping_cost(courier,courierID))
+```
+14. Password Generator:
+```python
+import random
+import string
+
+def password_generator():
+   
+    password = ''.join(random.choice(string.ascii_letters.upper() + string.ascii_letters.lower()+ string.digits + string.punctuation) for i in range(10))
+    return password
+
+print("Password:",password_generator())
+```
+
+15. Find Similar Addresses Function:
+```python
+def similar_addresses(new_address,addresses):
+  similar_address = []
+  for address in addresses:
+      if new_address.upper() in address.upper():
+          similar_address.append(address)
+  return similar_address
+
+addresses = ["123 Main St, New York, NY", "456 Maple Ave, Los Angeles, CA", "789 Oak St, New York, NY"]
+new_address=input("Enter the delivery address: ")
+print(similar_addresses(new_address,addresses))
+```
+
