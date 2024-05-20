@@ -1,11 +1,15 @@
 
 from Util.DBConn import DBConnection
 from abc import ABC,abstractmethod
+from myexceptions import InvalidEmployeeIdException
 
 
 class ICourierAdminService(ABC):
     @abstractmethod  
     def addCourierStaff(self, name, contact_number):
+        pass
+    @abstractmethod
+    def displayEmployee(self):
         pass
 
 class  CourierAdminService(ICourierAdminService,DBConnection):
@@ -29,4 +33,18 @@ class  CourierAdminService(ICourierAdminService,DBConnection):
                 print(employee)
         except Exception as e:
             print("Error !!",e)
+    
+    def displayEmployeeById(self,employeeId):
+        try:
+            self.cursor.execute("SELECT * FROM Employee where employeeId=?",(employeeId))
+            employee=self.cursor.fetchone()
+            if employee is None:
+                raise InvalidEmployeeIdException(employeeId)
+            else:
+                print(employee)
+        except InvalidEmployeeIdException as e:
+            print("Error!!",e)
+        except Exception as e:
+            print("Error!!",e)
+
     

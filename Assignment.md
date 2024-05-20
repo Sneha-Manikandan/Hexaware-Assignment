@@ -526,38 +526,79 @@ WHERE Weight>ALL(SELECT Weight FROM Courier
 1. Write a program that checks whether a given order is delivered or not based on its status (e.g., 
 "Processing," "Delivered," "Cancelled"). Use if-else statements for this.
 ```python
-orderId=int(input())
-status=courier["orderId"]["Status"]
-if(status=='Delivered'):
-    print("The order is delivered")
-elif(status=="Pending"):
-    print("The order is yet to be processed")
-elif(status=="In transit"):
-    print("The order is being shipped")
-else:
-    print("The status is unknown")
+def order_status(status):
+    if(status=='Delivered'):
+        print("The order is delivered")
+    elif(status=="Pending"):
+        print("The order is yet to be processed")
+    elif(status=="In transit"):
+        print("The order is being shipped")
+    else:
+        print("The status is unknown")
+status=int(input())
+order_status(status)
 ```
 
 2. Implement a switch-case statement to categorize parcels based on their weight into "Light," 
 "Medium," or "Heavy." 
 ```python
-if weight >= 0 and weight < 3:
-    return "Light"
-elif weight >= 3 and weight < 6:
-    return "Medium"
-elif weight >= 6:
-    return "Heavy"
-else:
-    return None
+def categorize_parcel(weight):
+    if weight >= 0 and weight < 3:
+        return "Light"
+    elif weight >= 3 and weight < 6:
+        return "Medium"
+    elif weight >= 6:
+        return "Heavy"
+    else:
+        return None
+weight=int(input())
+categorize_parcel(weight)
 ```
 3. Implement User Authentication 1. Create a login system for employees and customers using Java 
 control flow statements. 
 ```python
+user_database = {
+    "employee": {"username": "employee1", "password": "password1"},
+    "customer": {"username": "customer1", "password": "password2"}
+}
+
+def login():
+    user_type = input("Are you an employee or a customer? ").lower()
+    
+    if user_type not in user_database:
+        print("Invalid user type.")
+        return
+    
+    username = input("Enter your username: ")
+    password = input("Enter your password: ")
+    
+    if username == user_database[user_type]["username"] and password == user_database[user_type]["password"]:
+        print("Login successful!")
+    else:
+        print("Incorrect username or password.")
+
+
+login()
+
 ```
 
-4. Implement Courier Assignment Logic 1. Develop a mechanism to assign couriers to shipments based 
-on predefined criteria (e.g., proximity, load capacity) using loops. 
+4. Implement Courier Assignment Logic 1. Develop a mechanism to assign couriers to shipments based on predefined criteria (e.g., proximity, load capacity) using loops. 
 ```python
+couriers = [
+    {"name": "Courier 1", "load_capacity": 50},
+    {"name": "Courier 2", "load_capacity": 100},
+    {"name": "Courier 3", "load_capacity": 150}
+]
+
+def assignment_courier(ship_weight):
+    for courier in couriers:
+        if courier["load_capacity"] >= ship_weight:
+            return courier["name"]
+    return "No courier found with suitable load capacity"
+
+ship_weight = float(input("Enter ship weight: "))
+result = assignment_courier(ship_weight)
+print("Assigned courier:", result)
 ```
 
 5. Write a Java program that uses a for loop to display all the orders for a specific customer.
@@ -573,17 +614,62 @@ display_orders(courier,customerID)
 
 6. Implement a while loop to track the real-time location of a courier until it reaches its destination.
 ```python
+def track_courier(courier_id, current_location, destination):
+    print(f"Tracking Courier {courier_id}:")
+    while current_location != destination:
+        print(f"Courier is currently at {current_location}.")
+        current_location = input("Enter current location or 'end' to stop tracking: ")
+        if current_location.lower() == "end":
+            break
+    print(f"Courier {courier_id} has reached its destination at {destination}.")
 
+track_courier(1, "Warehouse", "Customer Location")
 ```
 7. Create an array to store the tracking history of a parcel, where each entry represents a location 
 update.
 ```python
+def store_tracking_history(parcel_id, locations):
+    tracking_history = []
+    for location in locations:
+        tracking_history.append({"parcel_id": parcel_id, "location": location})
+    return tracking_history
+
+parcel_id = 1
+locations = ["Warehouse", "Sorting Facility", "Transit", "Destination"]
+
+tracking_history = store_tracking_history(parcel_id, locations)
+print("Tracking History:")
+print(tracking_history)
 ``` 
 8. Implement a method to find the nearest available courier for a new order using an array of courier.
 ```python
+import math
+
+def find_nearest_courier(new_order_location, courier_locations):
+    min_distance = math.inf
+    nearest_courier = None
+    for courier_location in courier_locations:
+        distance = abs(new_order_location - courier_location)
+        if distance < min_distance:
+            min_distance = distance
+            nearest_courier = courier_location
+    return nearest_courier
+
+courier_locations = [10, 20, 30, 40, 50]
+new_order_location = 25
+nearest_courier = find_nearest_courier(new_order_location, courier_locations)
+print(f"The nearest available courier is at location {nearest_courier}.")
 ```
 9. Parcel Tracking:
 ```python
+parcel_tracking=[[1,"Parcel in transit"],[2,"Parcel out for delivery"],[3,"Parcel delivered"]]
+tracking_number=int(input("Enter your parcel Id:"))
+for parcel in parcel_tracking:
+ if parcel[0]==tracking_number:
+   print("Parcel Status:",parcel[1])
+   break
+ else:
+    print("Parcel not found")
 ```
 10. Customer Data Validation:
 ```python

@@ -79,7 +79,7 @@ Role VARCHAR(50),
 Salary DECIMAL(10, 2)
 );
 
-INSERT INTO Employee (EmployeeID, Name, Email, ContactNumber, Role, Salary)
+INSERT INTO Employee (Name, Email, ContactNumber, Role, Salary)
 VALUES
     ( 'Clara Wilson', 'clara@example.com', '1234567890', 'Manager', 50000.00),
     ('Robert Brown', 'robert@example.com', '0987654321', 'Clerk', 30000.00),

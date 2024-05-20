@@ -1,5 +1,6 @@
 from Util.DBConn import DBConnection
 from abc import ABC,abstractmethod
+from myexceptions import TrackingNumberNotFoundException
 
 
 
@@ -46,31 +47,44 @@ class CourierUserService(ICourierUserService,DBConnection):
             (TrackingNumber)
             )
             courier_status=self.cursor.fetchone()
-            print(courier_status)
+            if courier_status is None:
+                raise TrackingNumberNotFoundException(TrackingNumber)
+            else:
+                print(courier_status)
+        except TrackingNumberNotFoundException as e:
+            print("Error !!",e)
         except Exception as e:
             print("Error!!",e)
 
     def cancelOrder(self,TrackingNumber):
         try:
-            self.cursor.execute("Delete FROM CourierServiceMapping WHERE courierId IN (select courierId from courier where trackingNumber like ?",
-                        (TrackingNumber)
-                        )
-            self.cursor.execute("Delete FROM EmployeeCourier WHERE courierId IN (select courierId from courier where trackingNumber like ?",
-                        (TrackingNumber)
-                        )
-            self.cursor.execute("Delete FROM Payment WHERE courierId IN (select courierId from courier where trackingNumber like ?",
-                        (TrackingNumber)
-                        )
-            self.cursor.execute("Delete FROM Courier WHERE TrackingNumber LIKE?",
-                        (TrackingNumber)
-                        )
+            self.cursor.execute("SELECT COUNT(*) FROM Courier WHERE TrackingNumber = ?", (TrackingNumber,))
+            result = self.cursor.fetchone()
+            
+            if result[0] == 0:
+                raise TrackingNumberNotFoundException(TrackingNumber)
+            else:
+                self.cursor.execute("Delete FROM CourierServiceMapping WHERE courierId IN (select courierId from courier where trackingNumber like ?",
+                            (TrackingNumber)
+                            )
+                self.cursor.execute("Delete FROM EmployeeCourier WHERE courierId IN (select courierId from courier where trackingNumber like ?",
+                            (TrackingNumber)
+                            )
+                self.cursor.execute("Delete FROM Payment WHERE courierId IN (select courierId from courier where trackingNumber like ?",
+                            (TrackingNumber)
+                            )
+                self.cursor.execute("Delete FROM Courier WHERE TrackingNumber LIKE?",
+                            (TrackingNumber)
+                            )
+        except TrackingNumberNotFoundException as e:
+            print("Error !!!",e)
         except Exception as e:
             print("Error !!!",e)
         
        
     def getAssignedOrder(self,employeeID):
         try:
-            self.cursor.execute("SELECT CourierID FROM EmployeeCourier WHERE EmployeeID=?",
+            self.cursor.execute("select * from courier where CourierID in(select CourierID from EmployeeCourier where EmployeeID=?",
                         (employeeID) 
                         )
             couriers=self.cursor.fetchall()
